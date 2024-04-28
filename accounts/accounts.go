@@ -5,14 +5,14 @@ import (
 )
 
 type Account struct {
-	ower string
+	owner string
 	balance int
 }
 
 var errNoMoney error = errors.New("Can't withdraw you are poor")
 
-func NewAccount(ower string) *Account{
-	account := Account{ower: ower, balance: 0}
+func NewAccount(owner string) *Account{
+	account := Account{owner: owner, balance: 0}
 	return &account
 }
 
@@ -28,4 +28,19 @@ func (a *Account) Withdraw(amount int) error {
 	}
 	a.balance -= amount
 	return nil
+}
+
+
+func (a *Account) ChangeOwner(newOwner string){
+	a.owner = newOwner
+}
+
+
+func (a Account) Owner() string {
+	return a.owner
+}
+
+// like python str method
+func (a Account) String() string {
+	return "do something"
 }
