@@ -10,7 +10,7 @@ import (
 
 func main() {
 	// 1. 사용할 플래그 정의 (포인터 개념이 등장합니다!)
-	// flag.String(이름, 기본값, 설명)
+	// flag.String(이름, 기본값, 설명)  flag.String은 포인터를 반환함
 	dirPtr := flag.String("dir", ".", "복사할 대상 디렉토리 경로")
 	prefixPtr := flag.String("prefix", "backup", "파일명 앞에 붙일 접두어")
 
@@ -30,7 +30,7 @@ func main() {
 		return
 	}
 
-	for _, file := range files {
+	for _, file := range files { // 여기서 _은 index
 		if !file.IsDir() {
 			oldPath := filepath.Join(targetDir, file.Name())
 			newPath := filepath.Join(targetDir, prefix+"_"+file.Name())
@@ -39,7 +39,6 @@ func main() {
 			if err != nil {
 				fmt.Printf("실패: %s\n", file.Name())
 			} else {
-				fmt.Printf(_)
 				fmt.Printf("복사 완료: %s\n", newPath)
 			}
 		}
